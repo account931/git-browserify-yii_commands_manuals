@@ -6,7 +6,7 @@
       <meta http-equiv="Content-Type" content="text/html">
       <meta name="description" content="QR Codes, qr codes on-line," />
       <meta name="keywords" content="QR Codes on-line">
-      <title>GIT QR Codes</title>
+      <title>GIT QR Codes2</title>
   
       <!--Favicon-->
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
