@@ -9,12 +9,15 @@ $ git branch     ->list of all branches
 
 
 
-//Upload to github 
+//Upload to github ---
 
 $ git remote add origin remote_repository_URL    ->select reposotory, i.e https://github.com/account931/git_test/
 
 $ git push origin master       ->upload to github
 
 
-//add all modified
+
+
+//add all modified---
+
 git add -u
