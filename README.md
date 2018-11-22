@@ -20,6 +20,7 @@ $ git push origin master       ->upload to github
 
 //add all modified to tracked(before $git commit)---
 
+git add .
 git add -u
 
 
