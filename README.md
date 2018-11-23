@@ -22,7 +22,8 @@ $ git push origin master       ->upload to github
 
 //add all modified to tracked(before $git commit)---
 
-git add .
+git add .   -> add all
+
 git add -u
 
 
@@ -35,7 +36,7 @@ $ git branch   -> check branches lists
 $ git checkout master   -> switch to master branch
 
 
-See all commits histiry---------------------------------
+See all commits history---------------------------------
 
 $git log
 
