@@ -11,9 +11,9 @@ $ git branch     ->list of all branches
 
 //Upload to github ---
 
-$ git remote add origin remote_repository_URL    ->select reposotory, i.e https://github.com/account931/git_test/
+$ git remote add origin REMOTE_REPOSITORY_URL    ->select reposotory, i.e https://github.com/account931/git_test/
 
-$  git remote set-url origin URL
+$  git remote set-url origin REMOTE_REPOSITORY_URL   -> change repository, if was set prev
 
 $ git push origin master       ->upload to github
 
