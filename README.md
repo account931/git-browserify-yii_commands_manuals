@@ -1,15 +1,11 @@
-# git_test
+# git_commands
+#List of most used Git commands
 
-
-$ git checkout -b issue53    ->create and switch to new branch "issue53"
-
-$ git checkout master            ->switch to branch "Master"
-
-$ git branch     ->list of all branches
+==================================================================================================
 
 
 
-//Upload to github ---
+//Upload to github --------------------------------------------
 
 $ git remote add origin REMOTE_REPOSITORY_URL    ->select reposotory, i.e https://github.com/account931/git_test/
 
@@ -31,9 +27,12 @@ git add -u
 
 //Branches-------------
 
-$ git branch   -> check branches lists
+$ git branch   -> check branches lists ->list of all branches
 
 $ git checkout master   -> switch to master branch
+
+$ git checkout -b issue53    ->create and switch to new branch "issue53"
+
 
 
 See all commits history---------------------------------
