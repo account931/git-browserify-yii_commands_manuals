@@ -5,7 +5,7 @@
 
 
 
-//Upload to github --------------------------------------------
+//Upload to github -------------------------------------------
 
 $ git remote add origin REMOTE_REPOSITORY_URL    ->select reposotory, i.e https://github.com/account931/git_test/
 
