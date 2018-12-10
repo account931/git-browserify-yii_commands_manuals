@@ -18,9 +18,9 @@ $ git push origin master       ->upload to github
 
 //add all modified to tracked(before $git commit)---
 
-git add .   -> add all
+git add .   -> add all new untracked
 
-git add -u
+git add -u  -> add to commit all tracked
 
 
 
