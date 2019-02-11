@@ -18,10 +18,11 @@ $ git push origin master       ->upload to github
 
 //add all modified to tracked(before $git commit)---
 
-git add .   -> add all new untracked
+git add .   -> add all new untracked(mostly used)
 
 git add -u  -> add to commit all tracked
 
+git commit  -> save changes to commit(after {git add .})
 
 
 
