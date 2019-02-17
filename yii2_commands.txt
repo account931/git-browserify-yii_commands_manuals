@@ -3,7 +3,7 @@ init  -> to init index.php in folder "web"
 yii migrate -> migrage DB
 
 ---------------------
-#To add your own module, use Gii modules and add OUTSIDE THE COMPONENT[] this lines in config/web.php (for basic yii2 template):
+#To add your own module, use Gii modules and add OUTSIDE THE COMPONENT{'components' => []} this lines in config/web.php (for basic yii2 template):
   'modules' => ['admin' => ['class' => 'app\module\admin\admin',],],
  #Create url for your own component-> ['label' => 'Admin module', 'url' => ['/admin/default/index']], 
   
