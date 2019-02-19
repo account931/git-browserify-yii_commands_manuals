@@ -22,7 +22,7 @@ Add your module
  --------------------------------------------
  
  Pretty URL
- 1. In .htaccess->
+ 1. In .htaccess in root folder(not in web folder) ->
  
  Options +FollowSymlinks 
 RewriteEngine On 
