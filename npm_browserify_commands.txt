@@ -1,7 +1,8 @@
-# browserify js/geo_mapbox_core.js -o js/bundle_js.js -d      = creates js bundle
+# browserify js/geo_mapbox_core.js -o js/bundle_js.js -d      => creates js bundle
    
-#npm run watch-js  
-                                          =watch changes without rebuild
+#npm run watch-js   =>watch changes without rebuild
+
+================================================
 add to packagist.json
 
  "scripts": {
@@ -15,3 +16,5 @@ add to packagist.json
   }
 
 ================================================
+
+Gulp-> to run gulp.js command -> CLI: gulp command name
