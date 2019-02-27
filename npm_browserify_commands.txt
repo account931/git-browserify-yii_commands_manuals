@@ -17,4 +17,5 @@ add to packagist.json
 
 ================================================
 
-Gulp-> to run gulp.js command -> CLI: gulp command name
+Gulp-> to run gulp.js command -> CLI: gulp commandName
+How to use gulp.js and what dependencies must be npm-ed, see myWaze_GeoCode_Modules_CommonJS-18/tree/master/myWaze_Common_JS_browserify
