@@ -11,6 +11,7 @@ Add your migration(for instance in Basic, where no migration is avialble from st
 yii migrate/create create_user_table
 yii migrate  ->(or {php yii migrate}), just command without migrate file name from {console/migration}
 
+To fix migrate error "Could not find driver PDOException in yii2", go to openserver/modules/php/version/php.ini-> decomment (remove{;}){pdo_mysql} -> ;extension=php_pdo_mysql.dll
 ----------------------------------
 Add your module
 #To add your own module, use Gii modules and add OUTSIDE THE COMPONENT{'components' => []} this lines in config/web.php (for basic yii2 template):
