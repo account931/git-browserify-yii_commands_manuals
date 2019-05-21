@@ -9,7 +9,7 @@ composer update/composer install  -> update dependencies
 -----------------------------------
 Add your migration(for instance in Basic, where no migration is avialble from start)
 yii migrate/create create_user_table
-yii migrate
+yii migrate  ->(or {php yii migrate}), just command without migrate file name from {console/migration}
 
 ----------------------------------
 Add your module
