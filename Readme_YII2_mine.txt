@@ -1,0 +1,389 @@
+﻿
+Yii2 Rest Api. Basic template.
+IF use direct Yii download (not Composer), after folder unzip must create {cookieValidationKey} in config/web.php
+
+How it works:
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ =======================================
+CLI:
+(if CLI commands dont work, add {php} before-> i.e {php migrate}). 
+#init  -> to init index.php in folder "web" (or {php init})
+#yii migrate -> apply migration to DB(if migration is available, from start migration is available in advanced, not in basic)
+#composer update/composer install  -> update dependencies
+
+
+-----------------------------------
+How to Add your migration(for instance in Basic, where no migration is avialble from start)
+#yii migrate/create create_user_table or (php yii migrate/create create_user_table)
+#yii migrate  ->(or {php yii migrate}), just command without migrate file name from {console/migration} to apply all migrations.
+
+Error "Could not find driver PDOException in yii2", to fix go to openserver/modules/php/version/php.ini-> Line 886, decomment (remove{;}){pdo_mysql} -> ;extension=php_pdo_mysql.dll
+
+
+----------------------------------
+How to Add your module
+#To add your own module, use Gii modules and add OUTSIDE THE COMPONENT{'components' => []} this lines in config/web.php (for basic yii2 template):
+  'modules' => ['admin' => ['class' => 'app\module\admin\admin',],],
+#Create url for your own component-> ['label' => 'Admin module', 'url' => ['/admin/default/index']], 
+ 
+ 
+ 
+ 
+ --------------------------------------------
+ Pretty URL
+1. In .htaccess in root folder(not in web folder) ->
+ 
+  Options +FollowSymlinks 
+  RewriteEngine On 
+
+  RewriteCond %{REQUEST_URI} !^/web/(assets|css|js|pdf|img)/ 
+  RewriteCond %{REQUEST_URI} !index.php 
+  RewriteCond %{REQUEST_FILENAME} !-f [OR] 
+  RewriteCond %{REQUEST_FILENAME} !-d 
+  RewriteRule ^.*$ web/index.php
+
+2. In config/web/php->
+
+//Pretty
+		'urlManager' => [
+        'class' => 'yii\web\UrlManager',
+        // Disable index.php
+        'showScriptName' => false,
+        // Disable r= routes
+        'enablePrettyUrl' => true,
+        'rules' => array(
+            '<controller:\w+>/<id:\d+>' => '<controller>/view',
+            '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+            '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+        ),
+       ],
+	   //END Pretty
+	   
+3. If CSS/JS crashes with enabled prettyURL, create additional .htaccess in folder /web/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . index.php
+---------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+// **************************************************************************************
+// **************************************************************************************
+// **                                                                                  **
+// **                                                                                  **
+
+YII2 MANUAL (diffrent aspects)->
+
+
+
+
+==============================================================================
+#Yii2 basic, registration, login via db->
+How turn Yii2 Basic to resistration/login via DB SQL:
+https://xn--d1acnqm.xn--j1amh/%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B8/yii2-basic-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B8-%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-%D0%B1%D0%B4
+
+1. create migration(creats in /migrations/) ->  yii migrate/create create_user_table 
+3. go to /migration/m000000_000000_create_user_table.php and paste code from Advanced template migration or create your own. Paste ONLY methods {up() down()}!!!!! DON"T TOUCH CLASS NAME.
+2. apply migration-> yii migrate
+  
+  
+  
+  
+  
+  
+  
+  
+==============================================================================
+#Yii Error Handler
+How to use ErrorHandler (i.e 404 NOT FOUND):
+1. In config/web.php set action for errors ->  'errorHandler' => ['errorAction' => 'site/error',],
+2. In controller->  public function actions() return [ 'error' => ['class' => 'yii\web\ErrorAction',]. 
+  It will use built vendor/yii\web\ErrorAction,if you want create your own, comment it and create in controller your actionError()
+3. In web/index.php -> define('YII_ENABLE_ERROR_HANDLER', true);//to show my personal error handler
+
+
+
+
+
+
+
+
+
+
+
+================================================
+================================================
+#Yii Rest
+Yii2 REST  -> http://developer.uz/blog/restful-api-in-yii2/
+
+test URL(if prettyUrl off) -> http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/index.php?r=rest
+test URL, Pretty URL, retuns  only ID and email with $_GET specified like this: http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/rests?fields=id,email
+test URL(ControllerRest/actionView)(view 1 record)-> http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/rest/view/4
+
+1. Main core Rest Controller in /controllers/RestController.php. File in /modules/admin/DefaultController is just a test of module building, it is minor.
+2.This code line turns response to JSON (config/web.php) -> 'response' => ['format' => \yii\web\Response::FORMAT_JSON],
+3.By default model returns in response all model fields (i.e sql fields), to exclude excludes some unsafe fields from response-> public function fields(){$fields = parent::fields();unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);return $fields;}
+4.
+5.If you try to get Yii2 Rest response from non-REST file(i.e file outside Yii2 folder), that file must be run on localhost(i.e must have .php extension not .html)
+6.By default Yii2 rest returns xml, but it must not bother u,just specify in ajax {contentType: "application/json; charset=utf-8",} and it will return json
+7.We use RestController as a main Rest controller, it contains no actions, but actionIndex, actionView, etc work because our Controller extends {yii\rest\ActiveController}, which includes all these actions.
+  In our RestConroller we just have to defines the model to parse {public $modelClass = 'app\models\User';}.
+#To avoid CORS(cross domain) error, in RestController we should add code:
+
+public static function allowedDomains(){
+    return [ '*',  // star allows all domains
+	'http: // localhost: 3000', 'http://test1.example.com',];  
+	}
+
+public function behaviors(){
+    return array_merge(parent::behaviors(), [
+        // For cross-domain AJAX request
+        'corsFilter'  => [
+            'class' => \yii\filters\Cors::className(),
+            'cors'  => [
+                // restrict access to domains:
+                'Origin'                           => static::allowedDomains(),
+                'Access-Control-Request-Method'    => ['POST'],
+                'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Max-Age'           => 3600,  // Cache (seconds)
+            ], ], ]);
+
+
+8.
+
+			
+			
+			
+			
+			
+
+-----------------------------------------------------
+AJAX EXAMPLE TO Yii2 Rest (ajax request from non-REST file ):
+
+                   <script>
+				      //below script makes a test request to Yii2 Rest Api
+					  //this file must be run on localhost(i.e must have .php extension not .html)
+					  //By default Yii2 rest returns xml, but it must not bother,just specify in ajax {contentType: "application/json; charset=utf-8",} and it will return json
+				      $.ajax({
+                          url: '../yii-basic-app-2.0.15/basic/web/rest',
+                          type: 'GET', //must be GET, as it is REST /GET method
+						  crossDomain: true,
+						  contentType: "application/json; charset=utf-8",
+			              dataType: 'json', // without this it returned string(that can be alerted), now it returns object
+			              //passing the city
+                          data: { 
+			                  //serverCity:window.cityX
+			              },
+                          success: function(data) {
+                             // do something;
+                           
+			                //alert(data);
+							console.log(data);
+							var ress = "REST Api Response (list of users): <br>";
+							for (var i = 0; i < data.length; i++){
+								ress+= data[i].username + "-> " + data[i].email + "<br>";
+							}
+							$("#result").stop().fadeOut("slow",function(){ $(this).html(ress) }).fadeIn(2000);
+				
+                          },  //end success
+			              error: function (error) {
+				              $("#result").stop().fadeOut("slow",function(){ $(this).html("<h4 style='color:red;padding:3em;'>ERROR!!! <br> Rest API crashed <br>" + error + "</h4>")}).fadeIn(2000);
+                              console.log(error);
+						  }	  
+                     });                             
+                    //END AJAXed  part 
+				  </script>
+
+
+
+
+
+=========================================================
+=========================================================
+#Yii2 RBAC
+
+
+
+
+
+
+
+
+
+
+
+
+===============================================
+===============================================
+#Error deep_copy.php-> if encounter this error - how to fix:
+ Parse error: syntax error, unexpected 'function' (T_FUNCTION), expecting identifier (T_STRING) or in \vendor\myclabs\deep-copy\src\DeepCopy\deep_copy.php on line 
+ This error can be fixed just by removing this line-> {use function function_exists;}. The use function syntax is supported since PHP 5.6 only.
+ 
+ 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+=========================================== config/web.php example (Yii2 basic) =============================================================
+
+<?php
+
+$params = require __DIR__ . '/params.php';
+$db = require __DIR__ . '/db.php';
+
+$config = [
+
+   
+    //my Module
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Resttt',
+        ],
+    ],
+	
+	
+    'id' => 'basic',
+    'basePath' => dirname(__DIR__),
+    'bootstrap' => ['log'],
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
+	
+	//Components
+    'components' => [
+	
+        'request' => [
+			
+              // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+              'cookieValidationKey' => 'fdgeggdfgb54654645t',
+			  
+			  //'baseUrl'=> '',
+			  
+			  //mine
+		      /*'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+              ],*/
+        ],
+		
+		
+		//mine JSON---------------------------------------------------------------
+		'response' => [
+           //'format' => \yii\web\Response::FORMAT_JSON, //GIVES OUT JSON!!!!!!!!!!!!
+        ],
+	
+	
+	
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
+        'user' => [
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true,
+        ],
+		
+		//setting error handler
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
+		
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+            'useFileTransport' => true,
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+        'db' => $db,
+		
+		
+        //PRETTY URL
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,  // Hide index.php
+			//'class' => 'yii\web\UrlManager',
+            'rules' => [
+			     'yout-text-from-config-web-php.rar' => 'site/about', //pretty url for 1 action(if Tii sees 'site/about' it turn it to custom text)
+			     ['class' => 'yii\rest\UrlRule', 'controller' => 'rest'/*, 'extraPatterns' => ['GET /' => 'new'], 'pluralize' => false*/], //rule for rest api, means if Yii sees any action of RestController, it uses yii\rest\UrlRule 
+				  '<controller:\w+>/<id:\d+>' => '<controller>/view',  //for others, turns {site/about?vies=14} to {}
+				  '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                  '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+				  'defaultRoute' => '/site/index',
+            ],
+        ], //end pretty
+        
+			
+		
+    ],
+    'params' => $params,
+];
+
+if (YII_ENV_DEV) {
+    // configuration adjustments for 'dev' environment
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' => 'yii\debug\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        //'allowedIPs' => ['127.0.0.1', '::1'],
+    ];
+
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        //'allowedIPs' => ['127.0.0.1', '::1'],
+    ];
+}
+
+return $config;
+
