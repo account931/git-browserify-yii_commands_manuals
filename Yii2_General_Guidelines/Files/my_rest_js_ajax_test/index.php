@@ -1,3 +1,4 @@
+<!-- File to test Yii2 rest api from non-rest file(file which outside the Yii2 folder).Get Rest response with ajax -->
 <!doctype html>
 <!--------------------------------Bootstrap  Main variant ------------------------------------------>
   <html lang="en-US">
