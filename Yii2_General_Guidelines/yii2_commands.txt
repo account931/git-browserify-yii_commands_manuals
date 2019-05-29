@@ -1,3 +1,9 @@
+THIS FILE IS THE SAME AS IN /yii2_REST/basic/Readme_YII2_mine.txt.
+THIS FILE IS SLAVE. ALL EDITS ARE TO BE DONE IN ORIGINAL /yii2_REST/basic/Readme_YII2_mine.txt and then copied here.
+
+
+
+
 
 Yii2 Rest Api. Basic template.
 IF use direct Yii download (not Composer), after folder unzip must create {cookieValidationKey} in config/web.php
