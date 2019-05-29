@@ -54,6 +54,7 @@ $ git ls-files -v|grep '^h   --> see list of all untracked
 Or add to .gitignore  --> /folderName/
 
 =========================================
+
 git config core.autocrlf true  -> get rid off "LF will be replaced by CRLF"
 
 
