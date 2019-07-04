@@ -11,7 +11,10 @@ $ git remote add origin REMOTE_REPOSITORY_URL    ->select reposotory, i.e https:
 
 $  git remote set-url origin REMOTE_REPOSITORY_URL   -> change repository, if was set prev
 
-$ git push origin master       ->upload to github
+$ git push origin master       -> upload to github
+
+$ git clone https://github.com/account931/yii2_REST_and_Rbac_2019.git  -> clone Git repo to local hdd
+
 
 
 
