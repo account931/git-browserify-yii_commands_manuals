@@ -15,6 +15,9 @@ $ git push origin master       -> upload to github
 
 $ git clone https://github.com/account931/yii2_REST_and_Rbac_2019.git  -> clone Git repo to local hdd
 
+$ git pull origin -> updates any changes from Git repo to local HDD project
+
+
 
 
 
