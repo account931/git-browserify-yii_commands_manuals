@@ -41,6 +41,9 @@ $ git checkout master   -> switch to master branch
 $ git checkout -b issue53    ->create and switch to new branch "issue53"
 
 
+$ git checkout master  $git merge BRANCH_NAME  -> merge your new created branch to master branch(firstly you need to check-out to master)
+
+
 
 See all commits history---------------------------------
 
