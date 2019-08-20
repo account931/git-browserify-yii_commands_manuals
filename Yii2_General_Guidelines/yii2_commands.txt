@@ -1,10 +1,14 @@
+This is a copy. To see full & original manual, please proceed to https://github.com/account931/yii2_REST_and_Rbac_2019/blob/master/Readme_YII2_mine_Common_Comands.txt
+
+==============================
 THIS FILE IS THE SAME AS IN /yii2_REST_and_Rbac_2019/basic/Readme_YII2_mine.txt.
-THIS FILE IS SLAVE. ALL EDITS ARE TO BE DONE IN ORIGINAL /yii2_REST_and_Rbac_2019/basic/Readme_YII2_mine.txt and then copied here.
+THIS FILE IS SLAVE. ALL EDITS ARE TO BE DONE IN ORIGINAL /yii2_REST_and_Rbac_2019/basic/Readme_YII2_mine.txt and then copied.
+==============================
 
+Yii2 Rest Api. Basic template.
+IF use direct Yii download (not Composer), after folder unzip must create {cookieValidationKey} in config/web.php
 
-
-
-
+Table of contents:
 Yii2 Rest Api. Basic template.
 IF use direct Yii download (not Composer), after folder unzip must create {cookieValidationKey} in config/web.php
 
@@ -16,14 +20,22 @@ Table of contents:
 5.Yii2 basic. Registration, login via db.
 6.Yii Error Handler.
 7.Yii Restful API
+7.1 Yii Restful API(control token authorization(access available with token only))
 8.Yii RBAC
 9.Error deep_copy.php
 10.Pagination, PageLinker, AR
 11.Flash message
 12.DataProvider(can be used both in GridViw and ListView) + GridView + ListView.
-13.V.A(ActRec,create URL, redirect, get $_POST[''], etc)
-14. Known Errors
+13.Yii Access Filter (ACF)
+14.Register custom assets (js, css)
+15.Multilanguages
+16. Has Many relation
+17. Yii2 my custom validation
 
+98.V.A(ActRec,create URL, redirect, get $_POST[''], etc)
+99. Known Errors
+
+Codexception
 Yii ajax(shop)
 crsf
 Widget
@@ -39,9 +51,10 @@ Access Control filter
 1.Yii2 CLI Composer install & init.
 CLI:
 (if CLI commands dont work, add {php} before-> i.e {php migrate}). 
-#init  -> to init index.php in folder "web" (or {php init})
-#yii migrate -> apply migration to DB(if migration is available, from start migration is available in advanced, not in basic)
-#composer update/composer install  -> update dependencies
+#Browse to go to needed folder: cmd -> cd[blankspace]folder. U can hint folders by TAB.(i.e  C:\Users\Dima\Downloads\domains\....)
+#CLI->init        => to init Yii2 index.php in folder "web" (or {php init})
+#CLI->yii migrate => apply migration to DB(if migration is available, from start migration is available in advanced, not in basic)
+#CLI->composer update/composer install     => update dependencies in file {composer.json}
 
 
 
@@ -138,13 +151,19 @@ https://xn--d1acnqm.xn--j1amh/%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B8/yii2-basic-%D
   
   
 ==============================================================
-6.Yii Error Handler.
-#Yii Error Handler
-How to use ErrorHandler (i.e 404 NOT FOUND):
-1. In config/web.php set action for errors ->  'errorHandler' => ['errorAction' => 'site/error',],
+6.Yii Error Handler (how to handle Exceptions).
+#You can throw your custom Yii exception with following code ->   throw new \yii\web\NotFoundHttpException("Your text");
+#If Yii2 encounters your exception or any internal error, it will use built-in ErrorHandler.
+
+How to use built-in ErrorHandler, i.e when Yii2 encounters your custom Exception or some error (i.e 404 NOT FOUND):
+By default, the following code is already deployed in Yii2 application. Just make sure, this code exists, otherwise add it manually:
+1. In config/web.php set action for errors (inside {'components' => []}) ->  'errorHandler' => ['errorAction' => 'site/error',],  //Note that by default SiteController does not have ActionError(), but the handler will work, as it uses Class \vendor\yii\web\ErrorAction. For rendering view it  uses views/site/error.php
 2. In controller->  public function actions() return [ 'error' => ['class' => 'yii\web\ErrorAction',]. 
-  It will use built vendor/yii\web\ErrorAction,if you want create your own, comment it and create in controller your actionError()
-3. In web/index.php -> define('YII_ENABLE_ERROR_HANDLER', true);//to show my personal error handler
+In above case, Yii2 will use template from views/site/error.php to display Error page (i.e NOT FOUND PAGE or your custom Exception).
+To pass and show an Exception message to view, use in views/site/error.php {$message}. I.e can use in <title>, or pass to flash/alert div.
+
+This built-in  error Handler will use built \vendor\yii\web\ErrorAction,if you want create your own, comment it and create in controller your actionError()
+3. If you created your own {actionError()} and it does not work, try in web/index.php ->  define('YII_ENABLE_ERROR_HANDLER', true);//to show my personal error handler
 
 
 
@@ -161,10 +180,11 @@ How to use ErrorHandler (i.e 404 NOT FOUND):
 #Yii Rest
 Yii2 REST  -> http://developer.uz/blog/restful-api-in-yii2/
 
-test URL(if prettyUrl off) -> http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/index.php?r=rest
-test URL, Pretty URL, retuns  only ID and email with $_GET specified like this: http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/rests?fields=id,email
-test URL(ControllerRest/actionView)(view 1 record)-> http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/rest/view/4
+test URL from Yii2 (if prettyUrl off) -> http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/index.php?r=rest
+test URL from Yii2 , Pretty URL, retuns  only ID and email with $_GET specified like this: http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/rests?fields=id,email
+test URL from Yii2 (ControllerRest/actionView)(view 1 record)-> http://localhost/yii2_REST/yii-basic-app-2.0.15/basic/web/rest/view/4
 
+How to test Yii2 Rest Api from from non-Yii2 file, see more at =>  Readme_YII2_mine_This_Project_itself.txt -> 1.HOW TO TEST REST API from non-Yii2 file. 
 
 1.Main core Rest Controller in /controllers/RestController.php. File in /modules/admin/DefaultController is just a test of module building, it is minor.(See core minor -> /Files/Yii2_basic/controller/RestController.php)
 2.This code line turns response to JSON (config/web.php) -> 'response' => ['format' => \yii\web\Response::FORMAT_JSON],
@@ -196,7 +216,7 @@ public function behaviors(){
             ], ], ]);
 
 
-8.
+
 
 			
 			
@@ -246,7 +266,59 @@ AJAX EXAMPLE TO Yii2 Rest (ajax request from non-REST file ):
 
 
 				  
+================================================
+7.1 Yii Restful API(control token authorization(access available with token only))
+#test url with token=>  http://localhost/yii2_REST_and_Rbac_2019/yii-basic-app-2.0.15/basic/web/rests?access-token=1111
+#Tokens are stored in SQL {rest_access_tokens}, fields {rest_tokens, r_user} = (token, userID)
+
+#If 'authenticator' => is Enabled in controllers/RestController (meaning user token is required), ajax(from non-Yii) or Yii2 URL must contain user token (from SQL rest_access_tokens)  
+  i.e => url: '../web/rest?access-token=57Wpa-dlg-EonG6kB3myfsEjpo7v8R5b
+  Otherwise, it will fire "Unauthorized".
+  
+  
+How to implement access to Yii2 Rest Api with access token only:
+  a.)set property {enableSession} to {false} in User component. It is not mandatoty, so we don't use it here
+  b.)set public function behaviors() in Rest controller (different variant see in RestController):
+     use yii\filters\auth\HttpBasicAuth;
+	 $behaviors = parent::behaviors();
+     $behaviors['authenticator'] = [
+        'class' => HttpBasicAuth::className(),
+     ];
+      return $behaviors;
+     }
+	 
+  c.)set method {public static function findIdentityByAccessToken}:
+    c1.)IN CASE YOU STORE TOKENS in SQL DB {USER} in field {access_token}), set this method in models/User:
+     
+      use yii\web\IdentityInterface;
+	  public static function findIdentityByAccessToken($token, $type = null)
+      {
+        return static::findOne(['access_token' => $token]);
+      }
+
+   c2.)IN CASE YOU STORE TOKENS in a special own created SQL database(created for storing tokens only)-> {rest_access_tokens} in field {rest_tokens}) , 
+     c2_step1:set this method in models/User:
+	 
+	     public static function findIdentityByAccessToken($token, $type = null){
+		     return \app\models\RestAccessTokens::findOne(['rest_tokens' => $token]); //MINE //to use API Auth token, now it uses tokens stored in models/RestAccessTokens -> DB {rest_access_tokens}
+         }
+		
+    c2_step2:set in in models/RestAccessTokens:
+	  #add to class declaration ->  {implements \yii\web\IdentityInterface} //have to implements \yii\web\IdentityInterface to be used in models/Users/findIdentityByAcces
+      #copy 5 methods from model/User to comply with implementation of IdentityInterface Interface
+	  #change function findIdentityByAccessToken to:
+	     public static function findIdentityByAccessToken($token, $type = null){
+		    return static::findOne(['rest_tokens' => $token]); }
+
+
 				  
+		
+
+
+
+
+
+		
 				  
 =========================================================
 8.Yii RBAC
@@ -388,8 +460,158 @@ use yii\widgets\ListView;
  
  
  
+ 
+ 
+ 
+===================================================== 
+13.Yii Access Filter (ACF).
+It filters users access based if they are logged/unlogged.
+How to:
+ #In Controller, adds to  {public function behaviors()}:
+ use yii\filters\AccessControl;
+ public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+				
+				//To show message to unlogged users. Without this unlogged users will be just redirected to login page
+				'denyCallback' => function ($rule, $action) {
+                    throw new \yii\web\NotFoundHttpException("Only logged users are permitted!!!");
+                 },
+				 //END To show message to unlogged users. Without this unlogged users will be just redirected to login page
+				 
+                'only' => ['logout', 'add-admin'],
+                'rules' => [
+                    [
+                        'actions' => ['logout', 'add-admin'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ =====================================================
+ 14.Register custom assets (js, css)
+ How to:
+  1. Create in /assets folder new file, i.e {IshopAssetOnly.php}, class of this file should have the same name { IshopAssetOnly}
+  2. In View u want to register this css/js Asset Bundle put:
+       use app\assets\IshopAssetOnly;   // use your custom asset
+       IshopAssetOnly::register($this); // register your custom asset to use this js/css bundle in this View only(1st name-> is the name of Class)
+ 
+ 
+ 
+ 
 =====================================================
-13.V.A(ActRec,create URL, redirect, get $_POST[''], etc)
+15.Multilanguages
+(see live example at MultilanguageController/public function actionIndex())
+NB: setting is reset to null on reload, u should save selected language to Session or Cookie)
+When using Cookie keep in mind MEGA FIX : {Yii::$app->request->cookies} is for READ ONLY, to add a new cookie use {Yii::$app->response->cookies->}
+How to add multilanguages:
+  1. Add to main config (for basic it is /config/web.php)=>
+        return [
+	      //....
+          // set target language to be Russian
+             'language' => 'ru-RU',
+
+          // set source language to be English
+          'sourceLanguage' => 'en-US',
+          //......
+        ];
+		
+  2.Create new file /messages/ru-RU/app.php (for implementing translation for ru-RU language. 
+	            If you target language will be my-Lang, so, that will be /messages/my-Lang/app.php.
+	
+  3.Implement translation of your strings (in /messages/ru-Ru/app.php):
+	    return [
+           'welcome' => 'Добро пожаловать',
+           'This is a string to translate!' => 'Это строка для перевода'
+           //...
+         ];
+		 
+  4.Configure i18n component in your main config file like this (for basic it is in /config/web.php):
+	   'components' =>  
+       // ...
+       'i18n' => [
+          'translations' => [
+              'app*' => [
+                  'class' => 'yii\i18n\PhpMessageSource',
+                  //'basePath' => '@app/messages',
+                  //'sourceLanguage' => 'en-US',
+                  'fileMap' => [
+                      'app' => 'app.php',
+                      'app/error' => 'error.php',
+                  ],
+              ],
+          ],
+       ],
+],
+ 
+ 
+ 5. You can change/set current language with the below code. 
+            \Yii::$app->language = $lang;
+ 
+ NB: language setting is reset to null on reload, u should save selected language to Session) 
+      $session = Yii::$app->session;//opens session
+	  $session->set('language', $someValue);
+ 
+ 
+ 
+ 
+ 
+ 
+=====================================================
+16. Has Many relation 
+(see live example at SiteController/public function actionHasMany())
+ How to connect 2 SQL DB with relations ():
+ 1. Create a getter in model which will have realtion hasMany {this model(DB) iq can have many connections in other DBs}.
+    Getter name must start with get:
+	
+	  public function getTokens(){
+       return $this->hasMany(RestAccessTokens/*AuthAssignment*/::className(), ['r_user' => 'id']); //args=> (model/db name to connect, this model/DB column name => second model/db name id// Db fields which cooherent each other(from 2 DBs)
+      }
+  2. Then u can use this Getter in Controller:
+     $currentUser = User::findOne(Yii::$app->user->identity->id); //just find current user
+	 $orders = $currentUser->tokens; //call hasMany action //Token is a function getTokens
+  
+   
+ 
+ 
+ 
+ 
+ 
+ ==============================================================
+ 17. Yii2 my custom validation
+ To use your custom validation:
+  1. Put to model, to public function rules(){Section} your validation rule in format [['field to validate','your custom function that checks validation']]:
+     ['book_from','validateDatesX']
+ 
+   2. Deploy in model your custom validation function:
+       public function validateDatesX(){
+           if(strtotime($this->book_from) <= date("U")){//strtotime($this->start_date)){
+              $this->addError('book_from','Can"t be past!!!Please give correct Start Day');
+              //$this->addError('end_date','Please give correct Start and End dates');
+           }
+       }
+
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+=====================================================
+98.V.A(ActRec,create URL, redirect, get $_POST[''], etc)
 
 #Create URL =>$infoLink= Html::a( "more  info", ["/site/about", "period" => "",   ] /* $url = null*/, $options = ["title" => "more  info",] ); 
 #Create URL2 =>  use yii\helpers\Url; $url = Url::to(['message/view', 'id' => 100]);
@@ -408,17 +630,32 @@ use yii\widgets\ListView;
 #Safe Echo text in view=>  <?= HtmlPurifier::process($model->mydb_g_am ." geo  per  ") ;  ?>
 
 #Url name rule for actions like {actionAddAdmin} => {['/site/add-admin']]}
+#Url name rule for Controllers like {BookingCphController}  => {['/booking-cph/index']]}. Views/booking-cph/index.php
+
 #gets array with current user all roles rights=> $myRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->id); 
 #Image  echo Html::img(Yii::$app->getUrlManager()->getBaseUrl().'/images/addarrow.gif' , $options = ["id"=>"sx","margin-left"=>"3%","class"=>"sunimg","width"=>"12%","title"=>"click to add a  new  one"] ); ?>
 
 #How to write Method inside model-> $rbac = self::find()->where(['name' => $roleName])->one(); To use in Controller=>  if(AuthItem::checkIfRoleExist('adminX'))
- 
- 
- 
+#Gii(prettyUrl):   yii-basic-app-2.0.15/basic/web/gii  Non-pretty:  yii-basic-app-2.0.15/basic/web/index.php?r=gii
+#Refresh(prevent from sending form on the reload of page)=> return $this->refresh();
+
+#Throw yii exception -> throw new \yii\web\NotFoundHttpException("This exception is hand made.");
+#Gii (access Gii with prettyUrl)-> http://localhost/yii2_REST_and_Rbac_2019/yii-basic-app-2.0.15/basic/web/gii
+
+#Form url with JS for ajax: var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/'));  var urlX = dir + '/ajax_get_6_month';
+#Form url with Php for ajax: $URL = Yii::$app->request->baseUrl . "/site/ajax-rbac-insert-update";
+
+#Add id to form input => 	<?= $form->field($model, 'book_from' ,['inputOptions' => ['id' => 'uniqueID',],]) ->input('date') ;
 =======================================================
-14. Known Errors
-14.1 While trying to add RBAC migrations there is a Error "You should configure "authManager", while u have already added authManager to component in /config/web.php.
+99. Known Errors
+99.1 While trying to add RBAC migrations there is a Error "You should configure "authManager", while u have already added authManager to component in /config/web.php.
   Solution: add same config {  'authManager' => ['class' => 'yii\rbac\DbManager',],} to /config/console.php (for Basic template). For Advanced template, add it  to /console/config/main.php and not in the backend or frontend configuration files.
+  
+  
+  
+  
+  
+  
   
   
   
