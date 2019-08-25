@@ -45,11 +45,30 @@ $ git checkout master  $git merge BRANCH_NAME  -> merge your new created branch 
 
 
 
-See all commits history---------------------------------
+See all commits history, RESTORE/REVERT BACK to sSOME COMMIT---------------------------------
 
 $git log
 
-$ git reset --hard 1a410efbd13591db07496601ebc7a059dd55cfe9    ->restore some version
+$ git reset --hard 1a410efbd13591db07496601ebc7a059dd55cfe9    ->restore back some old version. Dangerous, it will erase any commits those were up to restoring point.
+
+
+SAFER VARIANT-----
+
+$ git reset --hard HEAD   -> To revert to a previous commit, ignoring any changes.
+
+IF u want to revert to a commit that's older than the most recent commit, use next 4 lines of commands:
+
+git reset 56e05fced   -> # Resets index to former commit; replace '56e05fced' with your commit code
+
+git reset --soft HEAD@{1}  -> # Moves pointer back to previous HEAD
+
+git commit -m "Revert to 56e05fced"
+
+git reset --hard  ->  # Updates working copy to reflect the new commit
+
+END SAFER VARIANT----
+
+
 
 
 ============= STOP tracking some files ===========
