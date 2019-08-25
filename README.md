@@ -45,7 +45,7 @@ $ git checkout master  $git merge BRANCH_NAME  -> merge your new created branch 
 
 
 
-See all commits history, RESTORE/REVERT BACK to sSOME COMMIT---------------------------------
+//See all commits history, RESTORE/REVERT BACK to SOME COMMIT---------------------------------
 
 $git log
 
