@@ -5,7 +5,7 @@
 
 
 
-//Upload to github -------------------------------------------
+===================Upload to github========================
 
 $ git remote add origin REMOTE_REPOSITORY_URL    ->select reposotory, i.e https://github.com/account931/git_test/
 
@@ -22,7 +22,7 @@ $ git pull origin -> updates any changes from Git repo to local HDD project
 
 
 
-//add all modified to tracked(before $git commit)---
+===============add all modified to tracked(before $git commit)=================
 
 git add .   -> add all new untracked(mostly used)
 
@@ -32,7 +32,7 @@ git commit  -> save changes to commit(after {git add .})
 
 
 
-//Branches-------------
+=========================Branches=====================
 
 $ git branch   -> check branches lists ->list of all branches
 
@@ -45,7 +45,8 @@ $ git checkout master  $git merge BRANCH_NAME  -> merge your new created branch 
 
 
 
-//See all commits history, RESTORE/REVERT BACK to SOME COMMIT---------------------------------
+
+=======================See all commits history, RESTORE/REVERT BACK to SOME COMMIT=====================================
 
 $git log
 
