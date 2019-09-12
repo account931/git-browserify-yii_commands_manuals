@@ -1,0 +1,15 @@
+Command Line Interface:
+
+  #pwd   => view the directory files in UNIX  (or {dir} in Wind)
+
+  #ls -a  or(just ls)  => view derictory  content
+
+  #cd folder + TAB to autofill  -working 
+
+  #$ cd ..  => root folder (go 1 level up)
+
+
+
+cd/var/www/html/yii/basic_download
+
+cd /home/var/www/html/yii/basic_download
