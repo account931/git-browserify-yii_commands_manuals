@@ -1,0 +1,21 @@
+Linux manual:
+
+ # call terminal => CTRL+Alt+T
+ # sudo apt install (for new Linux versions) === sudo apt-get install (for older)
+ 
+ # UltraISO can't not create bootable flash for Linux, so use specific soft, like Win32DiskImager.
+ 
+ #ThinkPad IBM T42 doesnot support PAE, so by default u can only install Ubuntu 10.04 or 11.10 and then upgrade to 12.04. The problem 12.04 supports onle PHP 5.3
+ #To install up-to-date version (i.e linuxmint-19.2-cinnamon-32bit) u have to force PAE => 
+   var1 => insert flash, start PC, hit F12 for load option, select flash and while Linux loading hit TAB and select Force PAE
+   var2 => while Linux loading, hit F6, hit ESC and add to string "forcepae"
+   
+ # See free space => Terminal => df
+ # See php version installed => => Terminal => php -var1
+ 
+ 
+ 
+ 
+============================== INSTALL LAMP =============================
+ 
+  
