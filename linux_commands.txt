@@ -18,4 +18,11 @@ Linux manual:
  
 ============================== INSTALL LAMP =============================
  
+============================== INSTALL LAMP ============================= 
   
+  
+  
+  
+ ============================== Window Wi-fi driver troubleshooting ============================= 
+  IBM T42 Install Wi-fi driver (for Windows) => DriverName: Qualcomm Atheros 11a/b/g Wireless Lan Mini PCI Adapter
+  If no .exe file to install a driver, go Dispecher (Device Manage) -> select Ethernet controller -> renew drivers -> select your drivers locations
