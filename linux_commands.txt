@@ -26,3 +26,34 @@ Linux manual:
  ============================== Window Wi-fi driver troubleshooting ============================= 
   IBM T42 Install Wi-fi driver (for Windows) => DriverName: Qualcomm Atheros 11a/b/g Wireless Lan Mini PCI Adapter
   If no .exe file to install a driver, go Dispecher (Device Manage) -> select Ethernet controller -> renew drivers -> select your drivers locations
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  ============================== Flash Drives Listing ============================= 
+  # Zim drive (8 GB) => 
+      # Windows 7 (32 bit) (with OK C++ for OpenServer)(Activates automatically but has an Activator)
+	  # Open Server 5_3_0_basic (32 bit)(Php 7.2)
+	  # Soft: (Wi-fi driver for T42 => qualcomm-11a-b-g-wireless-lan) + Winrar
+  ----------------------------
+  # IGN drive (8 GB) => 
+          #Windows 7 (64 bit) 
+  ----------------------------
+  
+  # Kingstone drive (16 GB) => 
+         #Live CD 
+		 #Dev folder
+  ----------------------------
+  
+  # Goodram Metal(8 GB) => 
+           #Windows 7 (32 bit) (with Corrupted C++)
+  ----------------------------
+  
+  # Goodram Metal(16 GB) =>
+  ----------------------------
