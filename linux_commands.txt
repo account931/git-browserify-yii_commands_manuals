@@ -37,13 +37,21 @@ Linux manual:
   
   
   ============================== Flash Drives Listing ============================= 
+  
+  ----------------------------
+  # Kingstone G4 Blue drive (32 GB) =>
+       # Windows 7 (32 bit) 2020 (with OK C++ for OpenServer with PHP > 7)(Activates automatically but has an Activator)
+	   # Open Server 5_3_0_basic (32 bit)(Php 7.2)
+	   # Dev folder
+  
+  ----------------------------
   # Zim drive (8 GB) => 
-      # Windows 7 (32 bit) (with OK C++ for OpenServer)(Activates automatically but has an Activator)
+      # Windows 7 (32 bit) 2020 (with OK C++ for OpenServer with PHP > 7)(Activates automatically but has an Activator)
 	  # Open Server 5_3_0_basic (32 bit)(Php 7.2)
 	  # Soft: (Wi-fi driver for T42 => qualcomm-11a-b-g-wireless-lan) + Winrar
   ----------------------------
   # IGN drive (8 GB) => 
-          #Windows 7 (64 bit) 
+          #Windows 7 (64 bit) 2020
   ----------------------------
   
   # Kingstone drive (16 GB) => 
@@ -52,8 +60,9 @@ Linux manual:
   ----------------------------
   
   # Goodram Metal(8 GB) => 
-           #Windows 7 (32 bit) (with Corrupted C++)
+           #Windows 7 (32 bit) 2017 (requires activator cw_09.exe, with Corrupted C++ (can use OpenServer with PHP 5.6 only))
   ----------------------------
   
   # Goodram Metal(16 GB) =>
+         #Windows 7 (64 bit) 2020
   ----------------------------
