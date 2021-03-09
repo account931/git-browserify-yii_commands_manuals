@@ -4,10 +4,9 @@
 
 ===================Upload to github========================
 
+$ git remote add origin {REMOTE_REPOSITORY_URL} ->select reposotory, i.e https://github.com/account931/git_test/
 
-$ git remote add origin REMOTE_REPOSITORY_URL ->select reposotory, i.e https://github.com/account931/git_test/
-
-$ git remote set-url origin REMOTE_REPOSITORY_URL -> change repository, if was set prev
+$ git remote set-url origin {REMOTE_REPOSITORY_URL} -> change repository, if was set prev
 
 $ git push origin master -> upload to github
 
@@ -17,9 +16,6 @@ $ git pull origin -> updates any changes from Git repo to local HDD project
 
 $ git pull URL_to_Git master -> variant 2 -> updates any changes from Git repo to local HDD project
 
-
-
-
 ===============add all modified to tracked(before $git commit)=================
 
 git add . -> add all new untracked(mostly used)
@@ -27,9 +23,6 @@ git add . -> add all new untracked(mostly used)
 git add -u -> add to commit all tracked
 
 git commit -> save changes to commit(after {git add .})
-
-
-
 
 =========================Branches=====================
 
@@ -40,8 +33,6 @@ $ git checkout master -> switch to master branch
 $ git checkout -b issue53 ->create and switch to new branch "issue53"
 
 $ git checkout master $git merge BRANCH_NAME -> merge your new created branch to master branch(firstly you need to check-out to master)
-
-
 
 =======================See all commits history, RESTORE/REVERT BACK to SOME COMMIT=====================================
 
@@ -77,6 +68,23 @@ $ git ls-files -v|grep '^h --> see list of all untracked
 
 Or add to .gitignore --> /folderName/
 
+
+
+================ How to merge old conflicting versions (if github contains manually uploaded project, while on your local project is more developed and u want to git it via GIT CLI Bash, but now there's a conflict) ========================
+
+Copy your localhost project somewhere, then create new empty folder on your local C:\ => {git init} there 
+    => git remote add origin {REMOTE_REPOSITORY_URL} 
+	=> {git pull} (if needed {git pull REMOTE BRANCH})
+	=> when Git pulled all files to your local from Github, then paste there your prev copied localhost project 
+	=> then as usual {git add .} {git commit}  {git push origin master}
+
+
+
+
+
+================ Troubleshooting ========================
+
+if {git commit} won't open default text editor for comment =>  git config --global core.editor "\"C:\Program Files\Notepad++\notepad++.exe\" %*"
 
 =========================================
 
