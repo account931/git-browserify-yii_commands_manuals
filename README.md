@@ -70,13 +70,14 @@ Or add to .gitignore --> /folderName/
 
 
 
-================ How to merge old conflicting versions (if github contains manually uploaded project, while on your local project is more developed and u want to git it via GIT CLI Bash, but now there's a conflict) ========================
+================ How to merge old conflicting versions (if github contains manually uploaded project, while on your local project is more developed and u want to git it via GIT CLI Bash, but now there's a conflict)
 
 Copy your localhost project somewhere, then create new empty folder on your local C:\ => {git init} there 
     => git remote add origin {REMOTE_REPOSITORY_URL} 
 	=> {git pull} (if needed {git pull REMOTE BRANCH})
 	=> when Git pulled all files to your local from Github, then paste there your prev copied localhost project 
 	=> then as usual {git add .} {git commit}  {git push origin master}
+
 
 
 
